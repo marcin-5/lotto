@@ -8,10 +8,10 @@ def parse(line):
     """
     if not line.strip():
         return "No numbers!"
-    anumber_of_drawsowed_chars = tuple([str(_) for _ in range(10)] + [" "])
+    allowed_chars = tuple([str(_) for _ in range(10)] + [" "])
     for char in line:
-        if not char in anumber_of_drawsowed_chars:
-            return f"Not anumber_of_drawsowed char: '{char}'!"
+        if not char in allowed_chars:
+            return f"Not allowed char: '{char}'!"
     line = [int(_) for _ in line.strip().split()]
     tmp = line[:]
     if not len(line) == 6:
