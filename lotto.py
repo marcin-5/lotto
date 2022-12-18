@@ -10,7 +10,7 @@ def parse(line):
         return "No numbers!"
     allowed_chars = tuple([str(_) for _ in range(10)] + [" "])
     for char in line:
-        if not char in allowed_chars:
+        if char not in allowed_chars:
             return f"Not allowed char: '{char}'!"
     line = [int(_) for _ in line.strip().split()]
     tmp = line[:]
