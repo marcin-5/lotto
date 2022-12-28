@@ -71,6 +71,7 @@ def lotto():
     draw_range = [*range(50)]
     # keys from 0 to 6, value hit counter
     results = dict([(i, 0) for i in range(7)])
+    print(f"Your numbers: {', '.join(map(str, user_numbers))}")
     for i in range(number_of_draws):
         shuffle(draw_range)
         draw_numbers = sorted(draw_range[:6])
