@@ -106,10 +106,10 @@ def lotto():
                           sorted(draw_numbers),
                           common)
         results[len(common)] += 1
-
-    for i in range(3, 7):
-        print(f"{i} hits: {results[i]}")
+    return results
 
 
 if __name__ == "__main__":
-    lotto()
+    res = lotto()
+    for i in range(3, 7):
+        print(f"{i} hits: {res[i]}")
