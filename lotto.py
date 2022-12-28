@@ -1,28 +1,31 @@
 from random import shuffle
 
 
-def parse(line):
+def get_number(msg, nmin=None, nmax=None, default=None):
+    """Get number from user.
+    Try until user give proper number.
+
+    :param str msg: message before input
+    :param int nmin: lower range of number
+    :param int nmax: upper range of number
+    :param int default: return default value if no input
+    :return: given number as int
     """
-    :param str line:
-    :return: list of numbers or error message
-    """
-    if not line.strip():
-        return "No numbers!"
-    allowed_chars = tuple([str(_) for _ in range(10)] + [" "])
-    for char in line:
-        if char not in allowed_chars:
-            return f"Not allowed char: '{char}'!"
-    line = [int(_) for _ in line.strip().split()]
-    tmp = line[:]
-    if not len(line) == 6:
-        return "Wrong amount of numbers!"
-    for i in line[:-1]:
-        tmp.pop(0)
-        if i in tmp:
-            return f"Repeated number: {i}!"
-    if min(line) < 1 or max(line) > 49:
-        return "Number out of range!"
-    return sorted(line)
+    while True:
+        result = input(msg)
+        if not result and default is not None:
+            return default
+        try:
+            result = int(result)
+        except ValueError:
+            print("It's not a number")
+        else:
+            if nmin is not None and result < nmin:
+                print(f"Number must be >= {nmin}")
+            elif nmax is not None and result > nmax:
+                print(f"Number must be <= {nmax}")
+            else:
+                return result
 
 
 def check(l1, l2):
@@ -39,11 +42,16 @@ def get_numbers():
 
     :return: list with 6 numbers provide by user
     """
-    while True:
-        result = parse(input("Enter six numbers from 1 to 49 space separated:\n"))
-        if type(result) is list:
-            return result
-        print(result)
+    result = []
+    print("Chose six different numbers from 1 to 49.")
+    for i in range(1, 7):
+        while True:
+            n = get_number(f"Number {i}: ", nmin=1, nmax=49)
+            if n not in result:
+                break
+            print("The number cannot be repeated.")
+        result.append(n)
+    return sorted(result)
 
 
 def get_number_of_draws():
@@ -52,16 +60,8 @@ def get_number_of_draws():
     :rtype: int
     :return: number of draws
     """
-    while True:
-        try:
-            number_of_draws = int(input("How many draws? "))
-        except ValueError:
-            print(f"{number_of_draws} is not a number!")
-        else:
-            if not number_of_draws:
-                print("Must be > 0!")
-            else:
-                return number_of_draws
+    return get_number("Chose number of draws: ",
+                      nmin=1, default=1)
 
 
 def lotto():
