@@ -34,15 +34,22 @@ def check(l1, l2):
     return tuple(i for i in l1 if i in l2)
 
 
+def get_numbers():
+    """Get 6 different numbers between 1 and 49.
+
+    :return: list with 6 numbers provide by user
+    """
+    while True:
+        result = parse(input("Enter six numbers from 1 to 49 space separated:\n"))
+        if type(result) is list:
+            return result
+        print(result)
+
+
 def lotto():
     """Main function."""
-    user_numbers = ""
+    user_numbers = get_numbers()
     number_of_draws = 0
-    while not user_numbers:
-        user_numbers = parse(input("Enter six numbers from 1 to 49 space separated:\n"))
-        if type(user_numbers) is not list:
-            print(user_numbers)
-            user_numbers = ""
     while not number_of_draws:
         try:
             number_of_draws = int(input("How many draws? "))
