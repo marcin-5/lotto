@@ -103,7 +103,8 @@ def lotto():
         draw_numbers = set(draw_range[:6])
         common = check(user_numbers, draw_numbers)
         if show_draw:
-            print_numbers("Lotto numbers: ",
+            print_numbers("\033[0%smLotto numbers:\033[0m " %
+                          ("" if len(common) < 3 else "4"),
                           sorted(draw_numbers),
                           common)
         results[len(common)] += 1
