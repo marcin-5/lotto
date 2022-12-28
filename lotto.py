@@ -45,13 +45,13 @@ def get_yn(msg, default=None):
             return result.lower() == "y"
 
 
-def check(l1, l2):
+def check(s1, s2):
     """
-    :param list l1:
-    :param list l2:
-    :return: tuple of common part
+    :param set s1:
+    :param set s2:
+    :return: frozenset of common elements
     """
-    return tuple(i for i in l1 if i in l2)
+    return frozenset(s1 & s2)
 
 
 def get_numbers():
@@ -59,16 +59,13 @@ def get_numbers():
 
     :return: list with 6 numbers provide by user
     """
-    result = []
+    result = set()
     print("Chose six different numbers from 1 to 49.")
     for i in range(1, 7):
-        while True:
-            n = get_number(f"Number {i}: ", nmin=1, nmax=49)
-            if n not in result:
-                break
-            print("The number cannot be repeated.")
-        result.append(n)
-    return sorted(result)
+        while i != len(result):
+            result |= {get_number(f"Number {i}: ",
+                                  nmin=1, nmax=49)}
+    return result
 
 
 def get_number_of_draws():
@@ -98,12 +95,12 @@ def lotto():
     draw_range = [*range(1, 50)]
     # keys from 0 to 6, value hit counter
     results = dict([(i, 0) for i in range(7)])
-    print_numbers("Your numbers: ", user_numbers)
+    print_numbers("Your numbers: ", sorted(user_numbers))
     for i in range(number_of_draws):
         shuffle(draw_range)
-        draw_numbers = sorted(draw_range[:6])
+        draw_numbers = set(draw_range[:6])
         if show_draw:
-            print_numbers("Lotto numbers: ", draw_numbers)
+            print_numbers("Lotto numbers: ", sorted(draw_numbers))
         number_of_hits = len(check(user_numbers, draw_numbers))
         results[number_of_hits] += 1
 
