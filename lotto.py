@@ -85,7 +85,7 @@ def print_numbers(msg, numbers, hits=frozenset()):
     :param list numbers: Numbers to print.
     :param frozenset hits: Set of numbers to colorize.
     """
-    print(msg + ", ".join(f"\033[93m {_}\033[00m" if _ in hits
+    print(msg + ", ".join(f"\033[93m{_}\033[00m" if _ in hits
                           else str(_) for _ in numbers))
 
 
