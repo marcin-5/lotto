@@ -78,13 +78,14 @@ def get_number_of_draws():
                       nmin=1, default=1)
 
 
-def print_numbers(msg, numbers):
+def print_numbers(msg, numbers, hits=frozenset()):
     """Print given message and numbers
 
     :param str msg: Message before numbers.
     :param list numbers: Numbers to print.
+    :param frozenset hits: Set of numbers to colorize.
     """
-    print(msg + ", ".join(map(str, numbers)))
+    print(msg + ", ".join(f"\033[93m {_}\033[00m" if _ in hits else str(_) for _ in numbers))
 
 
 def lotto():
@@ -99,10 +100,12 @@ def lotto():
     for i in range(number_of_draws):
         shuffle(draw_range)
         draw_numbers = set(draw_range[:6])
+        common = check(user_numbers, draw_numbers)
         if show_draw:
-            print_numbers("Lotto numbers: ", sorted(draw_numbers))
-        number_of_hits = len(check(user_numbers, draw_numbers))
-        results[number_of_hits] += 1
+            print_numbers("Lotto numbers: ",
+                          sorted(draw_numbers),
+                          common)
+        results[len(common)] += 1
 
     for i in range(3, 7):
         print(f"{i} hits: {results[i]}")
