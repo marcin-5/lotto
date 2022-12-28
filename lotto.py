@@ -28,6 +28,23 @@ def get_number(msg, nmin=None, nmax=None, default=None):
                 return result
 
 
+def get_yn(msg, default=None):
+    """Get answer yes or no from user.
+
+    :param str msg: message before input
+    :param default: Default answer when no input.
+    :rtype: bool
+    :return: True for yes and False for no.
+    """
+    while True:
+        result = input(msg + " [y/n]: ".replace(default.lower(),
+                                                default.upper()))
+        if not result and default:
+            result = default
+        if result.lower() in ("y", "n"):
+            return result.lower() == "y"
+
+
 def check(l1, l2):
     """
     :param list l1:
@@ -77,6 +94,7 @@ def lotto():
     """Main function."""
     user_numbers = get_numbers()
     number_of_draws = get_number_of_draws()
+    show_draw = get_yn("Show lotto numbers", default="n")
     draw_range = [*range(50)]
     # keys from 0 to 6, value hit counter
     results = dict([(i, 0) for i in range(7)])
@@ -84,6 +102,8 @@ def lotto():
     for i in range(number_of_draws):
         shuffle(draw_range)
         draw_numbers = sorted(draw_range[:6])
+        if show_draw:
+            print_numbers("Lotto numbers: ", draw_numbers)
         number_of_hits = len(check(user_numbers, draw_numbers))
         results[number_of_hits] += 1
 
