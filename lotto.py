@@ -64,6 +64,15 @@ def get_number_of_draws():
                       nmin=1, default=1)
 
 
+def print_numbers(msg, numbers):
+    """Print given message and numbers
+
+    :param str msg: Message before numbers.
+    :param list numbers: Numbers to print.
+    """
+    print(msg + ", ".join(map(str, numbers)))
+
+
 def lotto():
     """Main function."""
     user_numbers = get_numbers()
@@ -71,7 +80,7 @@ def lotto():
     draw_range = [*range(50)]
     # keys from 0 to 6, value hit counter
     results = dict([(i, 0) for i in range(7)])
-    print(f"Your numbers: {', '.join(map(str, user_numbers))}")
+    print_numbers("Your numbers: ", user_numbers)
     for i in range(number_of_draws):
         shuffle(draw_range)
         draw_numbers = sorted(draw_range[:6])
