@@ -60,7 +60,7 @@ def get_number_of_draws():
     :rtype: int
     :return: number of draws
     """
-    return get_number("Chose number of draws: ",
+    return get_number("Chose number of draws (default=1): ",
                       nmin=1, default=1)
 
 
