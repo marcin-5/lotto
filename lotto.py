@@ -46,19 +46,28 @@ def get_numbers():
         print(result)
 
 
-def lotto():
-    """Main function."""
-    user_numbers = get_numbers()
-    number_of_draws = 0
-    while not number_of_draws:
+def get_number_of_draws():
+    """Get number > 0
+
+    :rtype: int
+    :return: number of draws
+    """
+    while True:
         try:
             number_of_draws = int(input("How many draws? "))
         except ValueError:
             print(f"{number_of_draws} is not a number!")
-            number_of_draws = 0
         else:
             if not number_of_draws:
                 print("Must be > 0!")
+            else:
+                return number_of_draws
+
+
+def lotto():
+    """Main function."""
+    user_numbers = get_numbers()
+    number_of_draws = get_number_of_draws()
     draw_range = [*range(50)]
     # keys from 0 to 6, value hit counter
     results = dict([(i, 0) for i in range(7)])
