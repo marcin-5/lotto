@@ -95,7 +95,7 @@ def lotto():
     user_numbers = get_numbers()
     number_of_draws = get_number_of_draws()
     show_draw = get_yn("Show lotto numbers", default="n")
-    draw_range = [*range(50)]
+    draw_range = [*range(1, 50)]
     # keys from 0 to 6, value hit counter
     results = dict([(i, 0) for i in range(7)])
     print_numbers("Your numbers: ", user_numbers)
