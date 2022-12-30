@@ -60,7 +60,7 @@ def get_numbers():
     :return: list with 6 numbers provide by user
     """
     result = set()
-    print("Chose six different numbers from 1 to 49.")
+    print("Choose six different numbers from 1 to 49.")
     for i in range(1, 7):
         while i != len(result):
             result |= {get_number(f"Number {i}: ",
@@ -74,7 +74,7 @@ def get_number_of_draws():
     :rtype: int
     :return: number of draws
     """
-    return get_number("Chose number of draws (default=1): ",
+    return get_number("Choose number of draws (default=1): ",
                       nmin=0, default=1)
 
 
