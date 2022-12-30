@@ -78,6 +78,17 @@ def get_number_of_draws():
                       nmin=0, default=1)
 
 
+def get_stop_number():
+    """Get number from 1 to 6.
+    The number
+
+    :rtype: int
+    :return: number of hits to stop the loop
+    """
+    return get_number("Choose number of hits to stop draw (default=6):",
+                      nmin=1, nmax=6, default=6)
+
+
 def print_numbers(msg, numbers, hits=frozenset()):
     """Print given message and numbers
 
@@ -93,6 +104,7 @@ def lotto():
     """Main function."""
     user_numbers = get_numbers()
     number_of_draws = get_number_of_draws()
+    stop_number = get_stop_number()
     show_draw = get_yn("Show lotto numbers", default="n")
     count = min_hit = 0
     if show_draw and get_yn("Show only win draws", default="y"):
@@ -113,7 +125,7 @@ def lotto():
                           common)
         results[len(common)] += 1
         count += 1
-        if len(common) == 6 and not number_of_draws:
+        if len(common) == stop_number and not number_of_draws:
             print("Number of draws:", count)
             break
     return results
