@@ -104,7 +104,7 @@ def lotto():
     """Main function."""
     user_numbers = get_numbers()
     number_of_draws = get_number_of_draws()
-    stop_number = get_stop_number()
+    stop_number = -1 if number_of_draws else get_stop_number()
     show_draw = get_yn("Show lotto numbers", default="n")
     count = min_hit = 0
     if show_draw and get_yn("Show only win draws", default="y"):
