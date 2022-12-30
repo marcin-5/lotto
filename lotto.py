@@ -114,17 +114,18 @@ def lotto():
     results = dict([(i, 0) for i in range(7)])
     print_numbers("Your numbers: ", sorted(user_numbers))
     while not number_of_draws or count < number_of_draws:
+        count += 1
         shuffle(draw_range)
         draw_numbers = set(draw_range[:6])
         common = check(user_numbers, draw_numbers)
         if show_draw and len(common) >= min_hit:
-            print_numbers("\033[9%smLotto numbers:\033[0m " %
+            print_numbers(f"({count}) " +
+                          "\033[9%smLotto numbers:\033[0m " %
                           ("0" if len(common) < 3 else
                            "4251"[len(common) - 3]),
                           sorted(draw_numbers),
                           common)
         results[len(common)] += 1
-        count += 1
         if len(common) == stop_number and not number_of_draws:
             print("Number of draws:", count)
             break
