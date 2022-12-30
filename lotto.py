@@ -96,7 +96,7 @@ def lotto():
     show_draw = get_yn("Show lotto numbers", default="n")
     min_hit = 0
     if show_draw and get_yn("Show only win draws", default="y"):
-        min_hit = 2
+        min_hit = 3
     draw_range = [*range(1, 50)]
     # keys from 0 to 6, value hit counter
     results = dict([(i, 0) for i in range(7)])
@@ -105,7 +105,7 @@ def lotto():
         shuffle(draw_range)
         draw_numbers = set(draw_range[:6])
         common = check(user_numbers, draw_numbers)
-        if show_draw and len(common) > min_hit:
+        if show_draw and len(common) >= min_hit:
             print_numbers("\033[9%smLotto numbers:\033[0m " %
                           ("0" if len(common) < 3 else
                            "4251"[len(common) - 3]),
