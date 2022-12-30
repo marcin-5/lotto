@@ -69,13 +69,13 @@ def get_numbers():
 
 
 def get_number_of_draws():
-    """Get number > 0
+    """Get number > 0 or 0 for loop until hit 6 numbers
 
     :rtype: int
     :return: number of draws
     """
     return get_number("Chose number of draws (default=1): ",
-                      nmin=1, default=1)
+                      nmin=0, default=1)
 
 
 def print_numbers(msg, numbers, hits=frozenset()):
@@ -94,14 +94,14 @@ def lotto():
     user_numbers = get_numbers()
     number_of_draws = get_number_of_draws()
     show_draw = get_yn("Show lotto numbers", default="n")
-    min_hit = 0
+    count = min_hit = 0
     if show_draw and get_yn("Show only win draws", default="y"):
         min_hit = 3
     draw_range = [*range(1, 50)]
     # keys from 0 to 6, value hit counter
     results = dict([(i, 0) for i in range(7)])
     print_numbers("Your numbers: ", sorted(user_numbers))
-    for i in range(number_of_draws):
+    while not number_of_draws or count < number_of_draws:
         shuffle(draw_range)
         draw_numbers = set(draw_range[:6])
         common = check(user_numbers, draw_numbers)
@@ -112,6 +112,10 @@ def lotto():
                           sorted(draw_numbers),
                           common)
         results[len(common)] += 1
+        count += 1
+        if len(common) == 6 and not number_of_draws:
+            print("Number of draws:", count)
+            break
     return results
 
 
