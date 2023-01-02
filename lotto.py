@@ -122,6 +122,7 @@ def lotto():
         shuffle(draw_range)
         draw_numbers = set(draw_range[:6])
         common = check(user_numbers, draw_numbers)
+        results[len(common)] += 1
         if show_draw and len(common) >= min_hit:
             print_numbers(f"({count}) " +
                           "\033[9%smLotto numbers:\033[0m " %
@@ -129,9 +130,10 @@ def lotto():
                            "4251"[len(common) - 3]),
                           sorted(draw_numbers),
                           common)
-        results[len(common)] += 1
+        else:
+            print(" | ".join("{} : {}".format(k, v) for k, v in results.items()), end="\r")
         if len(common) == stop_number and not number_of_draws:
-            print("Number of draws:", count)
+            print("\nNumber of draws:", count)
             break
     return results
 
