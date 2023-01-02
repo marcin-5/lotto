@@ -28,7 +28,7 @@ def get_number(msg, nmin=None, nmax=None, default=None):
                 return result
 
 
-def get_yn(msg, default=None):
+def get_yn(msg, default=""):
     """Get answer yes or no from user.
 
     :param str msg: message before input
