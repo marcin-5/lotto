@@ -80,7 +80,7 @@ def get_number_of_draws():
 
 def get_stop_number():
     """Get number from 1 to 6.
-    The number
+    The number of hits which stop iterate.
 
     :rtype: int
     :return: number of hits to stop the loop
@@ -101,7 +101,11 @@ def print_numbers(msg, numbers, hits=frozenset()):
 
 
 def lotto():
-    """Main function."""
+    """Main function.
+
+    :rtype: dict
+    :return: keys - number of hits and values being count of occurrences.
+    """
     user_numbers = get_numbers()
     number_of_draws = get_number_of_draws()
     stop_number = -1 if number_of_draws else get_stop_number()
