@@ -36,13 +36,12 @@ def get_yn(msg, default=""):
     :rtype: bool
     :return: True for yes and False for no.
     """
-    while True:
-        result = input(msg + " [y/n]: ".replace(default.lower(),
-                                                default.upper()))
+    yn = " [y/n]: ".replace(default.lower(), default.upper())
+    while (result := input(msg + yn)).lower() not in ("y", "n"):
         if not result and default:
             result = default
-        if result.lower() in ("y", "n"):
-            return result.lower() == "y"
+            break
+    return result.lower() == "y"
 
 
 def check(s1, s2):
