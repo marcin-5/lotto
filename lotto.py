@@ -130,7 +130,7 @@ def lotto():
                           sorted(draw_numbers),
                           common)
         elif not show_draw:
-            print(" | ".join("{} : {}".format(k, v) for k, v in results.items()), end="\r")
+            print(" | ".join(f"{k} : {v: <{10-k}}" for k, v in results.items()), end="\r")
         if len(common) == stop_number and not number_of_draws:
             print("\nNumber of draws:", count)
             break
