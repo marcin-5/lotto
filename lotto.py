@@ -123,13 +123,13 @@ def lotto():
         common = check(user_numbers, draw_numbers)
         results[len(common)] += 1
         if show_draw and (n := len(common)) >= min_hit:
-            print_numbers(f"({count}) " +
+            print_numbers(f"({count: >{len(str(number_of_draws))}}) " +
                           "\033[9%smLotto numbers:\033[0m " %
                           ("0" if n < 3 else
                            "4251"[n - 3]),
                           sorted(draw_numbers),
                           common)
-        else:
+        elif not show_draw:
             print(" | ".join("{} : {}".format(k, v) for k, v in results.items()), end="\r")
         if len(common) == stop_number and not number_of_draws:
             print("\nNumber of draws:", count)
